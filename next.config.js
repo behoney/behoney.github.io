@@ -1,13 +1,8 @@
-module.exports = {
-  reactStrictMode: true,
-
-}
-
-const withMDX = require('@next/mdx')({
+const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
-})
+});
 module.exports = withMDX({
-  pageExtensions: ['js', 'jsx', 'mdx'],
-  target: 'serverless',
-})
-
+  pageExtensions: ["js", "jsx", "mdx"],
+  target: "serverless",
+  reactStrictMode: true,
+});
