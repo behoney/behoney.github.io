@@ -1,8 +1,9 @@
 name: Build and Deploy
-on: 
+on:
   push:
     branches:
       - main
+      - build_issue#1
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,18 +21,21 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install and Build
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
       - run: npm install
       - run: npm run build
       - run: npm run export
         env:
-            CI: true
+          CI: true
       - run: touch out/.nojekyll
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           ACCESS_TOKEN: ${{ secrets.GHP_NEXTJS }}
-          BRANCH: gh-pages 
+          BRANCH: gh-pages
           FOLDER: out
           CLEAN: true
