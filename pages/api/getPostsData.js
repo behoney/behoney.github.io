@@ -42,6 +42,9 @@ export function getPostsMetaData() {
     metadata["id"] = parsedFile.name;
     return metadata;
   });
+
+  console.log(postsMetaData);
+  
   return postsMetaData;
 }
 
