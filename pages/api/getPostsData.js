@@ -43,7 +43,7 @@ export function getPostsMetaData() {
     return metadata;
   });
 
-  console.log(postsMetaData);
+  // console.log(postsMetaData);
   
   return postsMetaData;
 }
