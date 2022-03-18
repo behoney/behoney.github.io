@@ -18,7 +18,6 @@ export default function Home({ postsData }) {
 
         <div className={styles.grid}>
           {postsData.map((metadata) => {
-            console.log(metadata);
             return (
               <a
                 key={metadata.id}

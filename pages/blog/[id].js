@@ -2,16 +2,25 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { getPostData, getAllPostsPath } from "../api/getPostsData.js";
 
+import Random from "../../components/Random";
+const components = { Random };
+
 export default function Blog({ postMetadata, postContent, id }) {
   return (
     <div>
       {/* <div>{postMetadata}</div> */}
 
       <div>
-        <MDXRemote {...postContent} />
+        <MDXRemote {...postContent} components={components} />
       </div>
 
-      <p>{id}</p>
+      <p
+        onClick={() => {
+          window.history.back();
+        }}
+      >
+        back to home
+      </p>
     </div>
   );
 }
