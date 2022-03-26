@@ -1,10 +1,10 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { getPostsMetaData } from "./api/getPostsData";
+// import { getPostsMetaData } from "./api/getPostsData";
 import { test } from "./api/notion/notionAuth";
 
 export default function Home({ postsData }) {
-  test()
+  console.log(postsData);
   return (
     <div className={styles.container}>
       <Head>
@@ -21,10 +21,11 @@ export default function Home({ postsData }) {
 }
 
 export async function getStaticProps() {
-  const postsData = getPostsMetaData();
+  // const postsData = getPostsMetaData();
+  const data = await test();
   return {
     props: {
-      postsData: postsData,
+      postsData: data ?? "noting loaded",
     },
   };
 }
