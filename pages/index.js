@@ -1,8 +1,10 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { getPostsMetaData } from "./api/getPostsData";
+import { test } from "./api/notion/notionAuth";
 
 export default function Home({ postsData }) {
+  test()
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +15,7 @@ export default function Home({ postsData }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome!</h1>
-      </main>      
+      </main>
     </div>
   );
 }
