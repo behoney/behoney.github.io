@@ -31,11 +31,35 @@ async function addItem(text) {
 export async function test() {
     console.log("hello from notion Auth.js");
 
+    const results = await (async () => {
+        const response = await notion.search({
+            sort: {
+                direction: 'ascending',
+                timestamp: 'last_edited_time',
+            },
+        });
 
-    addItem("Yurts in Big Sur, California")
+        const pages = []
+        for (const result of response.results) {
+            if (result?.object === 'page')
+                pages.push(result)
+        }
+
+        for (const page of pages)
+        {
+
+            (async () => {
+                const pageId = page.id;
+                const response = await notion.pages.retrieve({ page_id: pageId });
+                console.log(response.properties.post);
+            })();
+        }
+    })();
+
+
+    // addItem("Yurts in Big Sur, California")
 
     // Initializing a client
-
 
     // (async () => {
     //     const databaseId = NOTION_DATABASE_ID;
