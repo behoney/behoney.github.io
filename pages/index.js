@@ -1,10 +1,11 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 // import { getPostsMetaData } from "./api/getPostsData";
-import { test } from "./api/notion/notionAuth";
+import { test, testBlock } from "./api/notion/notionAuth";
 
-export default function Home({ postsData }) {
-  console.log(postsData);
+export default function Home({ postsData, block }) {
+  // console.log(postsData);
+  console.log("block",block);
   return (
     <div className={styles.container}>
       <Head>
@@ -14,6 +15,9 @@ export default function Home({ postsData }) {
       </Head>
 
       <main className={styles.main}>
+        <p>
+          {block.length}
+        </p>
         <h1 className={styles.title}>Welcome!</h1>
         {postsData.map(e => {
           return <Card title={e.title} key={e.id} />
@@ -33,9 +37,12 @@ const Card = ({ title }) => {
 export async function getStaticProps() {
   // const postsData = getPostsMetaData();
   const data = await test();
+  const blocks = await testBlock(data[0].id)
+  console.log("getStaticProps",blocks);
   return {
     props: {
       postsData: data ?? "noting loaded",
+      block: blocks ?? []
     },
   };
 }

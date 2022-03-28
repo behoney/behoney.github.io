@@ -28,7 +28,26 @@ async function addItem(text) {
     }
 }
 
-export async function test() {
+export async function testBlock(pageID) {
+    if (pageID !== undefined) {
+        const results = []
+        const blocks = []
+        await notion.blocks.children.list({ block_id: pageID })
+            .then((e) => {
+                for (const elem of e.results) {
+                    results.push(elem)
+                }
+            })
+        for (const elem of results)
+            await notion.blocks.retrieve({ block_id: elem.id })
+                .then(block => {
+                    blocks.push(block)
+                })
+        console.log("blocks!", blocks);
+        return blocks;
+    }
+}
+export async function test(isTitle = true, pageID = undefined) {
     // console.log("hello from notion Auth.js");
 
     const getTitles = async () => {
@@ -50,10 +69,10 @@ export async function test() {
             const pageId = page.id;
             const response = await notion.pages.retrieve({ page_id: pageId });
             titles.push({ title: response.properties.post.title[0].plain_text, id: page.id });
-            console.log(response.properties.post.title);
         }
         return titles;
     };
+
     const result = await getTitles()
     // console.log(result);
     return result;
