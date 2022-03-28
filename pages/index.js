@@ -15,7 +15,7 @@ export default function Home({ postsData }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome!</h1>
-        {postsData.map(e => <Card title={e} />)}
+        {postsData.map(e => <Card title={e} key={e}/>)}
       </main>
 
     </div>
