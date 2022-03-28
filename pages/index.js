@@ -24,9 +24,9 @@ export default function Home({ postsData, block }) {
         })}
 
         {
-                                            // why array for rich_text...?
-                                            // weird :(
-          block.map(e=><p>{e.paragraph.rich_text[0]?.plain_text}</p>)
+          // why array for rich_text...?
+          // weird :(
+          block.map(e => <p key={e.id}>{e.paragraph.rich_text[0]?.plain_text}</p>)
         }
       </main>
 
