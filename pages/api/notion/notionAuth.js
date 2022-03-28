@@ -49,11 +49,12 @@ export async function test() {
         for (const page of pages) {
             const pageId = page.id;
             const response = await notion.pages.retrieve({ page_id: pageId });
-            titles.push(response.properties.post.title[0].plain_text);
+            titles.push({ title: response.properties.post.title[0].plain_text, id: page.id });
+            console.log(response.properties.post.title);
         }
         return titles;
     };
     const result = await getTitles()
-    console.log(result);
+    // console.log(result);
     return result;
 }
